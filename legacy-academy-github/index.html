@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160f20">
+<title>The Legacy Academy — Là où les histoires recommencent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#160f20;--night2:#21152b;--wine:#55263f;--wine2:#773b55;--gold:#d7b66e;--gold2:#f0dca9;--cream:#f4ead6;--muted:#c9bba9;--line:rgba(215,182,110,.35);--panel:rgba(38,25,45,.88);--shadow:0 20px 60px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--night);color:var(--cream);font-family:Manrope,Arial,sans-serif;line-height:1.65}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 15% 20%,rgba(111,59,91,.18),transparent 30%),radial-gradient(circle at 85% 65%,rgba(79,67,119,.16),transparent 34%),linear-gradient(140deg,#160f20,#1e1428 55%,#120e1a)}
+a{color:var(--gold2)}button,input,select,textarea{font:inherit}button{cursor:pointer}.site-header{position:sticky;top:0;z-index:50;background:rgba(19,13,27,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{max-width:1200px;margin:auto;min-height:72px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-family:Cinzel,serif;letter-spacing:.12em;color:var(--gold2);font-size:17px;text-decoration:none;white-space:nowrap}.nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.nav-links a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--gold2)}.menu-toggle{display:none;background:none;border:1px solid var(--line);color:var(--cream);border-radius:8px;padding:7px 11px}
+.hero{min-height:660px;display:grid;place-items:center;text-align:center;padding:100px 22px 90px;position:relative;overflow:hidden}.hero:before,.hero:after{content:"✧";position:absolute;color:rgba(215,182,110,.25);font-size:120px;animation:float 7s ease-in-out infinite}.hero:before{top:15%;left:12%}.hero:after{bottom:14%;right:13%;font-size:80px;animation-delay:1.5s}@keyframes float{50%{transform:translateY(-16px) rotate(12deg);opacity:.6}}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.3em;text-transform:uppercase}.hero h1{font-family:Cinzel,serif;font-weight:500;letter-spacing:.07em;font-size:clamp(38px,7vw,78px);line-height:1.15;margin:18px auto;max-width:950px;color:var(--gold2);text-shadow:0 5px 35px rgba(215,182,110,.15)}.hero p{max-width:680px;margin:18px auto 30px;color:#dfd1bf;font-family:"Cormorant Garamond",serif;font-size:clamp(20px,2.5vw,27px)}.ornament{color:var(--gold);letter-spacing:.6em;margin:18px}.btn{border:1px solid var(--gold);background:linear-gradient(135deg,#704057,#48263e);color:#fff3dc;padding:12px 20px;border-radius:3px;text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:700;transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(215,182,110,.15);background:linear-gradient(135deg,#87516a,#583047)}.btn.secondary{background:transparent;color:var(--gold2)}.btn.small{padding:8px 12px;font-size:10px}.btn.danger{border-color:#a85c65;background:#542b3b}.section{max-width:1200px;margin:auto;padding:82px 22px}.section-head{text-align:center;margin-bottom:36px}.section-head h2{font:500 clamp(28px,4vw,43px) Cinzel,serif;color:var(--gold2);margin:8px 0}.section-head p{color:var(--muted);max-width:680px;margin:0 auto}.divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);max-width:500px;margin:22px auto}.story-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:stretch}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:var(--shadow)}.panel h3{font:500 23px Cinzel,serif;color:var(--gold2);margin:0 0 12px}.quote{font:italic 25px "Cormorant Garamond",serif;color:var(--gold2);border-left:2px solid var(--gold);padding:8px 0 8px 20px;margin:20px 0}.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.pill{border:1px solid var(--line);color:var(--gold2);padding:6px 10px;border-radius:30px;font-size:11px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0}.field{background:#170f20;border:1px solid var(--line);border-radius:5px;color:var(--cream);padding:11px 13px;min-width:170px;outline:none}.field:focus{border-color:var(--gold)}.search{min-width:min(100%,280px)}.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px 0 28px}.filter{background:transparent;border:1px solid var(--line);color:var(--muted);padding:8px 12px;border-radius:30px;font-size:11px}.filter.active,.filter:hover{background:var(--wine);border-color:var(--gold);color:var(--gold2)}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.parent-card{background:linear-gradient(155deg,rgba(66,42,67,.9),rgba(29,19,37,.95));border:1px solid var(--line);border-radius:10px;padding:18px;min-height:218px;display:flex;flex-direction:column;transition:.25s;position:relative;overflow:hidden}.parent-card:after{content:"✧";position:absolute;right:12px;top:5px;color:rgba(215,182,110,.22);font-size:40px}.parent-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 15px 35px rgba(0,0,0,.25)}.card-category{color:var(--gold);font-size:9px;letter-spacing:.15em;text-transform:uppercase}.parent-card h3{font:500 19px Cinzel,serif;color:var(--cream);margin:10px 0 2px}.origin{font:italic 16px "Cormorant Garamond",serif;color:var(--muted)}.card-bottom{margin-top:auto;padding-top:15px;display:flex;justify-content:space-between;align-items:center;gap:8px}.status{font-size:10px;color:#d9c9ad;border:1px solid var(--line);padding:4px 8px;border-radius:20px}.status.full{color:#f1a4a4;border-color:#a85c65}.status.pending{color:#f0d58d}.count{font-size:11px;color:var(--muted)}.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:35px}
+.draw-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:start}.draw-result{min-height:230px}.result-parent{padding:12px 0;border-bottom:1px solid var(--line)}.result-parent:last-child{border:0}.result-parent strong{font:500 19px Cinzel,serif;color:var(--gold2)}.magic-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.magic-item{background:rgba(255,255,255,.035);padding:12px;border:1px solid rgba(215,182,110,.18);border-radius:7px}.magic-item b{display:block;color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}.magic-item span{font:18px "Cormorant Garamond",serif}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-group{display:flex;flex-direction:column;gap:6px}.form-group label{font-size:11px;color:var(--gold2);letter-spacing:.08em;text-transform:uppercase}.form-group.full{grid-column:1/-1}.form-group textarea{min-height:90px;resize:vertical}.form-group .field{width:100%}.parent-picks{display:flex;flex-wrap:wrap;gap:8px}.parent-picks label{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid var(--line);padding:8px 10px;border-radius:6px;font-size:12px;text-transform:none;letter-spacing:0;color:var(--cream)}.notice{font-size:12px;color:var(--muted);padding:12px;border-left:2px solid var(--gold);background:rgba(215,182,110,.06);margin:15px 0}.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.rule{background:var(--panel);border:1px solid var(--line);padding:20px;border-radius:9px}.rule .number{font:25px Cinzel,serif;color:var(--gold)}.rule h3{font:17px Cinzel,serif;color:var(--gold2);margin:5px 0}.rule p{font-size:13px;color:var(--muted);margin:0}.admin-list{display:grid;gap:10px}.admin-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.025)}.admin-row small{display:block;color:var(--muted)}.footer{border-top:1px solid var(--line);padding:35px 22px;text-align:center;background:#110c18}.footer .brand{display:block;margin-bottom:12px}.footer p{font:italic 20px "Cormorant Garamond",serif;color:var(--muted)}.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(680px,100%);max-height:88vh;overflow:auto;background:#21152b;border:1px solid var(--gold);border-radius:12px;padding:25px;box-shadow:var(--shadow);position:relative}.modal-close{position:absolute;right:14px;top:12px;background:none;border:1px solid var(--line);color:var(--cream);border-radius:50%;width:34px;height:34px}.modal h2{font:25px Cinzel,serif;color:var(--gold2);margin:0 40px 5px 0}.modal h3{font:17px Cinzel,serif;color:var(--gold);margin:20px 0 5px}.modal p,.modal li{color:var(--muted);font-size:14px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#35223d;border:1px solid var(--gold);color:var(--cream);padding:12px 18px;border-radius:8px;z-index:150;display:none;max-width:90%;text-align:center}.muted{color:var(--muted)}.hidden{display:none!important}
+@media(max-width:900px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}.nav-links{gap:12px}.nav-links a{font-size:10px}}
+@media(max-width:680px){.menu-toggle{display:block}.nav{flex-wrap:wrap}.nav-links{display:none;width:100%;padding:10px 0 4px;flex-direction:column;align-items:flex-start}.nav-links.open{display:flex}.nav-links a{font-size:12px;padding:5px}.hero{min-height:570px}.section{padding:60px 16px}.story-grid,.draw-layout{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.parent-card{padding:13px;min-height:205px}.parent-card h3{font-size:16px}.rules{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:auto}.magic-list{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.cards{grid-template-columns:1fr 1fr}.rules{grid-template-columns:1fr}.magic-list{grid-template-columns:1fr}.hero h1{font-size:36px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="#home">THE LEGACY ACADEMY</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#academy">L'académie</a><a href="#directory">Les lignées</a><a href="#draw">Tirage</a><a href="#character">Créer un élève</a><a href="#rules">Règlement</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <div class="eyebrow">Une nouvelle génération · Une nouvelle histoire</div>
+    <div class="ornament">✧ ───── ✧ ───── ✧</div>
+    <h1>The Legacy Academy</h1>
+    <p>« Votre héritage raconte d'où vous venez. Il ne décide pas de qui vous deviendrez. »</p>
+    <a class="btn" href="#academy">Découvrir l'académie</a>
+    <div class="ornament">✧</div>
+  </div>
+</section>
+
+<section class="section" id="academy">
+  <div class="section-head"><div class="eyebrow">Au commencement était une histoire</div><h2>Bienvenue à l'académie</h2><div class="divider"></div><p>Les contes ne se terminent jamais vraiment. Ils se transmettent, se transforment et donnent naissance à de nouvelles légendes.</p></div>
+  <div class="story-grid">
+    <article class="panel">
+      <h3>Un héritage à découvrir</h3>
+      <p>Depuis des générations, les personnages les plus célèbres des contes, des mythologies et des légendes transmettent leur histoire à leurs descendants. Princes, princesses, dieux, héros, sorcières, monstres et aventuriers ont désormais une nouvelle génération.</p>
+      <p>Au sein de cette académie, les élèves apprennent à comprendre leurs origines, à maîtriser leurs capacités et à trouver leur propre place dans un monde qui attend parfois d'eux qu'ils reproduisent les exploits — ou les erreurs — de leurs parents.</p>
+      <div class="quote">Faut-il suivre les traces de ses ancêtres, ou avoir le courage d'écrire sa propre fin ?</div>
+    </article>
+    <article class="panel">
+      <h3>Les lignées mêlées</h3>
+      <p>Un élève peut descendre d'un ou de deux personnages. Les origines n'ont pas besoin d'appartenir au même conte, à la même époque ou au même univers.</p>
+      <p>Un descendant de Poséidon et de Dracula, de Méduse et de Cendrillon, ou encore de Loki et de la Reine Maléfique peut ainsi voir naître un héritage inédit.</p>
+      <div class="pill-row"><span class="pill">Contes</span><span class="pill">Mythologies</span><span class="pill">Disney</span><span class="pill">Légendes</span><span class="pill">Folklore</span><span class="pill">Fantastique</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="directory">
+  <div class="section-head"><div class="eyebrow">Le livre des origines</div><h2>Répertoire des parents</h2><div class="divider"></div><p>Explore les lignées, découvre leurs histoires et consulte les héritages qu'elles pourraient transmettre.</p></div>
+  <div class="toolbar">
+    <input class="field search" id="searchInput" placeholder="Rechercher un personnage ou une origine…" aria-label="Rechercher">
+    <select class="field" id="statusFilter"><option value="all">Tous les statuts</option><option value="available">Avec une place disponible</option><option value="full">Complets</option><option value="excluded">Non disponibles</option></select>
+  </div>
+  <div class="filters" id="categoryFilters"></div>
+  <div class="cards" id="parentCards"></div>
+</section>
+
+<section class="section" id="draw">
+  <div class="section-head"><div class="eyebrow">Laissez le destin choisir</div><h2>Le tirage des lignées</h2><div class="divider"></div><p>Un parent ou deux ? Laissez le hasard révéler les origines de votre personnage.</p></div>
+  <div class="draw-layout">
+    <div class="panel">
+      <h3>Votre tirage</h3>
+      <p class="muted">Les parents désactivés ou exclus du tirage ne pourront pas être sélectionnés. Les parents complets sont automatiquement ignorés.</p>
+      <div class="form-group"><label for="drawCount">Nombre de parents</label><select class="field" id="drawCount"><option value="1">Une lignée</option><option value="2">Deux lignées — sang mêlé</option></select></div>
+      <div class="form-group" style="margin-top:12px"><label><input type="checkbox" id="drawAvailable" checked> Uniquement les parents ouverts aux réservations</label></div>
+      <button class="btn" id="drawButton" style="margin-top:18px;width:100%">✧ Tirer au sort ✧</button>
+      <p class="notice">Le tirage est une proposition de création. Il ne réserve pas automatiquement un parent.</p>
+    </div>
+    <div class="panel draw-result" id="drawResult"><h3>Votre destinée vous attend</h3><p class="muted">Les personnages tirés au sort et leur héritage apparaîtront ici.</p></div>
+  </div>
+</section>
+
+<section class="section" id="character">
+  <div class="section-head"><div class="eyebrow">À vous d'écrire la suite</div><h2>Créer un élève</h2><div class="divider"></div><p>Composez votre personnage et découvrez ce que son héritage lui a transmis.</p></div>
+  <div class="panel">
+    <form id="characterForm">
+      <div class="form-grid">
+        <div class="form-group"><label for="charName">Prénom</label><input class="field" id="charName" required maxlength="40" placeholder="Le prénom de votre personnage"></div>
+        <div class="form-group"><label for="charNickname">Surnom (facultatif)</label><input class="field" id="charNickname" maxlength="40" placeholder="Son surnom"></div>
+        <div class="form-group"><label for="charAge">Âge</label><input class="field" id="charAge" type="number" min="1" max="999" required placeholder="Âge"></div>
+        <div class="form-group"><label for="charParents">Nombre de parents</label><select class="field" id="charParents"><option value="1">Un parent</option><option value="2">Deux parents — lignée mixte</option></select></div>
+        <div class="form-group full"><label>Choisir ses parents</label><div class="parent-picks" id="parentPicks"></div></div>
+        <div class="form-group full"><button type="button" class="btn secondary" id="inheritButton">Générer mon héritage aléatoire</button><div id="charInheritance" class="notice">Sélectionnez votre ou vos parents, puis générez votre héritage.</div></div>
+        <div class="form-group full"><label for="charAppearance">Description physique</label><textarea class="field" id="charAppearance" placeholder="Apparence, particularités, style…"></textarea></div>
+        <div class="form-group full"><label for="charPersonality">Personnalité</label><textarea class="field" id="charPersonality" placeholder="Qualités, défauts, tempérament…"></textarea></div>
+        <div class="form-group"><label for="charLegacy">Rapport à son héritage</label><select class="field" id="charLegacy"><option>Assume pleinement son héritage</option><option>Souhaite dépasser ses parents</option><option>Rejette son héritage</option><option>Ne connaît pas encore ses origines</option><option>Est partagé entre deux héritages</option></select></div>
+        <div class="form-group"><label for="charDream">Rêve ou ambition</label><input class="field" id="charDream" placeholder="Ce qu'il souhaite accomplir"></div>
+        <div class="form-group full"><label for="charSecret">Secret</label><textarea class="field" id="charSecret" placeholder="Un secret qu'il garde pour lui…"></textarea></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><button class="btn" type="submit">Enregistrer cette fiche (démo)</button><button class="btn secondary" type="reset">Effacer</button></div>
+      <p class="notice">Les fiches sont enregistrées localement dans cette version de démonstration. Elles ne sont pas encore envoyées au staff.</p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="rules">
+  <div class="section-head"><div class="eyebrow">Les lois de l'académie</div><h2>Le règlement</h2><div class="divider"></div><p>Quelques règles pour que chacun puisse écrire son histoire dans un cadre respectueux.</p></div>
+  <div class="rules">
+    <article class="rule"><div class="number">I</div><h3>Respect</h3><p>Le respect entre membres est indispensable. Le harcèlement, les discriminations et les attaques personnelles sont interdits.</p></article>
+    <article class="rule"><div class="number">II</div><h3>Hors-jeu et en jeu</h3><p>Les conflits entre personnages doivent rester distincts des relations entre joueurs.</p></article>
+    <article class="rule"><div class="number">III</div><h3>Pas de God-Modding</h3><p>Ne contrôlez pas le personnage d'un autre joueur et n'imposez pas ses actions ou ses réactions.</p></article>
+    <article class="rule"><div class="number">IV</div><h3>Contenu approprié</h3><p>Les contenus explicites ou inappropriés sont interdits. Respectez les limites et les règles du serveur.</p></article>
+    <article class="rule"><div class="number">V</div><h3>Réservation des parents</h3><p>Une réservation devient officielle après validation du staff. Chaque parent est limité à trois descendants.</p></article>
+    <article class="rule"><div class="number">VI</div><h3>Décision du staff</h3><p>Le staff veille au bon fonctionnement du serveur et prend les décisions finales en matière de modération et de validation.</p></article>
+  </div>
+</section>
+
+<section class="section hidden" id="staff">
+  <div class="section-head"><div class="eyebrow">Archives réservées</div><h2>Espace staff</h2><div class="divider"></div><p>Accès privé à l'administration de l'académie.</p></div>
+  <div class="panel" id="staffLoginPanel">
+    <h3>Connexion du personnel</h3>
+    <p class="muted">Connectez-vous avec le compte staff qui vous a été attribué.</p>
+    <form id="staffLoginForm" class="form-grid">
+      <div class="form-group"><label for="staffEmail">Adresse e-mail</label><input class="field" id="staffEmail" type="email" autocomplete="username" required></div>
+      <div class="form-group"><label for="staffPassword">Mot de passe</label><input class="field" id="staffPassword" type="password" autocomplete="current-password" required></div>
+      <div class="form-group full"><button class="btn" type="submit">Se connecter</button><p class="muted" id="staffLoginMessage" aria-live="polite"></p></div>
+    </form>
+  </div>
+  <div class="panel hidden" id="staffDashboard">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><h3>Gestion des lignées</h3><p class="muted">Modifiez le nombre de descendants et les paramètres de chaque parent.</p></div><button class="btn secondary small" id="staffLogout">Déconnexion</button></div>
+    <div class="notice">Chaque parent peut avoir entre 0 et 3 descendants. Les changements sont enregistrés dans la base partagée.</div>
+    <div class="admin-list" id="parentAdmin"></div>
+    <h3 style="margin-top:28px">Demandes de réservation</h3><div class="admin-list" id="reservationAdmin"><p class="muted">Les demandes seront connectées à la base partagée dans une prochaine étape.</p></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <a class="brand" href="#home">THE LEGACY ACADEMY</a>
+  <p>« Les histoires changent de visage, mais la magie demeure. »</p>
+  <p style="font:11px Manrope,sans-serif;margin-top:22px">Un univers de roleplay imaginé par sa communauté.</p>
+</footer>
+
+<div class="modal-backdrop" id="parentModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+  <div class="modal"><button class="modal-close" id="modalClose" aria-label="Fermer">×</button><div class="eyebrow">Archives des lignées</div><h2 id="modalName"></h2><div class="origin" id="modalOrigin"></div><div id="modalBody"></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px"><button class="btn" id="reserveButton">Demander une réservation</button><button class="btn secondary" id="modalDone">Fermer</button></div></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// CONFIGURATION SUPABASE : renseignez l’URL du projet et la clé anon publique.
+// Ne placez JAMAIS la clé service_role dans ce fichier.
+const SUPABASE_URL = "COLLEZ_ICI_URL_SUPABASE";
+const SUPABASE_ANON_KEY = "COLLEZ_ICI_CLE_ANON_SUPABASE";
+let supabaseClient = null;
+let staffUser = null;
+// ============================================================
+// DONNÉES DES PARENTS — AJOUTEZ OU MODIFIEZ LES PERSONNAGES ICI
+// available = réservable manuellement ; random = inclus au tirage.
+// children = nombre de descendants déjà présents (maximum 3).
+// Le nombre initial est tiré une seule fois et conservé localement.
+// ============================================================
+const parentSeed = [
+ {name:"Cendrillon",origin:"Charles Perrault",category:"Princes et princesses",story:"Une jeune femme qui, malgré l'injustice, conserve sa bonté et voit son destin transformé par la magie.",personality:"Bienveillante, patiente et déterminée.",powers:["Affinité magique","Lien avec les animaux"],secondary:["Intuition","Enchantement d'objets"],weaknesses:["Confiance excessive","Vulnérabilité aux maléfices"],traits:["Affinité avec les animaux","Lueur dorée au contact de la magie"]},
+ {name:"Blanche-Neige",origin:"Frères Grimm",category:"Princes et princesses",story:"Princesse poursuivie par la jalousie, elle trouve refuge auprès de créatures de la forêt.",personality:"Douce, courageuse et généreuse.",powers:["Communication avec les animaux","Résistance aux poisons"],secondary:["Apaisement","Connexion à la forêt"],weaknesses:["Naïveté","Sensibilité aux enchantements"],traits:["Voix mélodieuse","Présence apaisante"]},
+ {name:"Raiponce",origin:"Frères Grimm / Disney",category:"Princes et princesses",story:"Une jeune fille aux cheveux extraordinaires, longtemps tenue à l'écart du monde.",personality:"Curieuse, créative et optimiste.",powers:["Cheveux guérisseurs","Lumière magique"],secondary:["Guérison légère","Escalade exceptionnelle"],weaknesses:["Pouvoir lié aux cheveux","Impulsivité"],traits:["Cheveux lumineux","Éclat doré dans les yeux"]},
+ {name:"Ariel",origin:"Hans Christian Andersen / Disney",category:"Princes et princesses",story:"Une princesse des mers fascinée par le monde terrestre.",personality:"Curieuse, audacieuse et rêveuse.",powers:["Adaptation aquatique","Communication marine"],secondary:["Nage rapide","Voix envoûtante"],weaknesses:["Éloignement de l'eau","Curiosité risquée"],traits:["Reflets marins dans les cheveux","Yeux océaniques"]},
+ {name:"Belle",origin:"La Belle et la Bête",category:"Princes et princesses",story:"Une lectrice passionnée qui apprend à voir au-delà des apparences.",personality:"Intelligente, indépendante et empathique.",powers:["Empathie surnaturelle","Mémoire exceptionnelle"],secondary:["Résistance aux enchantements","Intuition"],weaknesses:["Tendance à se sacrifier","Curiosité"],traits:["Affinité avec les livres anciens","Aura chaleureuse"]},
+ {name:"Aurore",origin:"Charles Perrault / Grimm",category:"Princes et princesses",story:"Une princesse frappée par une malédiction liée au sommeil.",personality:"Rêveuse, douce et réservée.",powers:["Magie du sommeil","Vision onirique"],secondary:["Communication avec les animaux","Prémonitions en rêve"],weaknesses:["Sommeil magique","Grande sensibilité"],traits:["Aura rosée","Rêves prémonitoires"]},
+ {name:"Jasmine",origin:"Les Mille et Une Nuits / Disney",category:"Princes et princesses",story:"Une princesse indépendante qui refuse de laisser d'autres décider de son avenir.",personality:"Fière, curieuse et déterminée.",powers:["Connexion aux félins","Volonté renforcée"],secondary:["Agilité","Lecture des émotions"],weaknesses:["Impulsivité","Méfiance"],traits:["Regard félin","Agilité remarquable"]},
+ {name:"Elsa",origin:"La Reine des Neiges / Disney",category:"Princes et princesses",story:"Une reine qui apprend à accepter une magie glaciale puissante.",personality:"Réservée, protectrice et déterminée.",powers:["Cryokinésie","Création de glace"],secondary:["Résistance au froid","Construction magique"],weaknesses:["Émotions incontrôlées","Isolement"],traits:["Cheveux argentés","Température corporelle basse"]},
+ {name:"La Reine Maléfique",origin:"Blanche-Neige / Grimm et Disney",category:"Méchants",story:"Une souveraine obsédée par la beauté, le pouvoir et le contrôle.",personality:"Orgueilleuse, calculatrice et ambitieuse.",powers:["Magie noire","Métamorphose"],secondary:["Illusions","Miroirs enchantés"],weaknesses:["Vanité","Obsession"],traits:["Aura sombre","Reflets changeants"]},
+ {name:"Ursula",origin:"La Petite Sirène / Disney",category:"Méchants",story:"Une sorcière des mers qui conclut des pactes et manipule les désirs.",personality:"Charismatique, rusée et théâtrale.",powers:["Magie des abysses","Pactes enchantés"],secondary:["Manipulation des tentacules","Potions"],weaknesses:["Pactes et contrats","Ambition dévorante"],traits:["Marques marines","Voix envoûtante"]},
+ {name:"Mère Gothel",origin:"Raiponce / Grimm et Disney",category:"Méchants",story:"Une femme qui cherche à conserver éternellement sa jeunesse grâce à la magie.",personality:"Manipulatrice, possessive et patiente.",powers:["Magie de régénération","Enchantements végétaux"],secondary:["Illusions","Connaissance des plantes"],weaknesses:["Dépendance à une source magique","Peur du vieillissement"],traits:["Vieillissement irrégulier","Cheveux aux reflets végétaux"]},
+ {name:"Capitaine Crochet",origin:"Peter Pan — J. M. Barrie",category:"Méchants",story:"Un capitaine obsédé par sa rivalité avec Peter Pan et par le tic-tac du crocodile.",personality:"Théâtral, rancunier et stratège.",powers:["Escrime exceptionnelle","Instinct de survie"],secondary:["Commandement","Navigation"],weaknesses:["Peur du temps","Orgueil"],traits:["Main aux doigts froids","Sens du danger"]},
+ {name:"Dracula",origin:"Bram Stoker",category:"Monstres et créatures",story:"Un comte vampire lié à la nuit, à la séduction et à une soif surnaturelle.",personality:"Énigmatique, raffiné et prédateur.",powers:["Vampirisme","Régénération"],secondary:["Vision nocturne","Métamorphose partielle","Vitesse surnaturelle"],weaknesses:["Lumière solaire","Soif de sang"],traits:["Canines développées","Yeux changeants"]},
+ {name:"Créature de Frankenstein",origin:"Mary Shelley",category:"Monstres et créatures",story:"Un être artificiellement créé qui cherche une place dans un monde qui le rejette.",personality:"Sensible, intelligent et tourmenté.",powers:["Force exceptionnelle","Résistance physique"],secondary:["Apprentissage rapide","Résistance au froid"],weaknesses:["Isolement","Sensibilité émotionnelle"],traits:["Cicatrices lumineuses","Peau froide"]},
+ {name:"Méduse",origin:"Mythologie grecque",category:"Monstres et créatures",story:"Une Gorgone dont le regard peut pétrifier ceux qui le croisent.",personality:"Farouche, méfiante et profondément blessée.",powers:["Regard pétrifiant","Contrôle des serpents"],secondary:["Sens aiguisés","Résistance aux venins"],weaknesses:["Contrôle difficile du regard","Vulnérabilité émotionnelle"],traits:["Chevelure serpentine","Yeux reptiliens"]},
+ {name:"Le Minotaure",origin:"Mythologie grecque",category:"Monstres et créatures",story:"Créature enfermée dans le labyrinthe, symbole de puissance et de perte de repères.",personality:"Fier, instinctif et solitaire.",powers:["Force colossale","Sens de l'orientation"],secondary:["Endurance","Ouïe développée"],weaknesses:["Colère","Espaces confinés"],traits:["Cornes","Puissance physique"]},
+ {name:"Le Phénix",origin:"Mythes antiques",category:"Monstres et créatures",story:"Oiseau légendaire qui renaît de ses cendres.",personality:"Majestueux, indépendant et résilient.",powers:["Régénération par le feu","Pyrokinésie"],secondary:["Vol","Purification"],weaknesses:["Épuisement après renaissance","Eau abondante"],traits:["Plumes incandescentes","Chaleur corporelle"]},
+ {name:"Le Kraken",origin:"Folklore scandinave",category:"Monstres et créatures",story:"Créature abyssale dont l'apparition annonce des tempêtes et des naufrages.",personality:"Imprévisible, ancien et territorial.",powers:["Hydrokinésie","Force tentaculaire"],secondary:["Pression abyssale","Perception des vibrations"],weaknesses:["Milieux secs","Lenteur terrestre"],traits:["Marques semblables à des ventouses","Peau froide"]},
+ {name:"Zeus",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Roi des dieux de l'Olympe, maître du ciel et de la foudre.",personality:"Autoritaire, puissant et parfois impulsif.",powers:["Maîtrise de la foudre","Contrôle des orages"],secondary:["Force divine","Vol","Autorité surnaturelle"],weaknesses:["Orgueil","Colère"],traits:["Yeux électriques","Marques de foudre"]},
+ {name:"Athéna",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Déesse de la sagesse, de la stratégie et des arts de la guerre.",personality:"Stratégique, réfléchie et exigeante.",powers:["Intelligence tactique","Sagesse surnaturelle"],secondary:["Maîtrise des armes","Résistance mentale"],weaknesses:["Perfectionnisme","Difficulté à improviser"],traits:["Regard perçant","Affinité avec les chouettes"]},
+ {name:"Hadès",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Souverain du monde souterrain et gardien des richesses enfouies.",personality:"Solitaire, strict et loyal à ses devoirs.",powers:["Magie des ombres","Communication avec les morts"],secondary:["Contrôle des esprits","Pyrokinésie sombre"],weaknesses:["Attachement au monde souterrain","Solitude"],traits:["Aura froide","Yeux luminescents"]},
+ {name:"Poséidon",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Dieu des mers, des séismes et des chevaux.",personality:"Fier, passionné et imprévisible.",powers:["Hydrokinésie","Contrôle des marées"],secondary:["Respiration aquatique","Communication marine"],weaknesses:["Éloignement de l'eau","Tempérament instable"],traits:["Yeux océaniques","Marques écailleuses"]},
+ {name:"Apollon",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Dieu associé au soleil, à la musique, à la prophétie et à la guérison.",personality:"Brillant, fier et artistique.",powers:["Lumière solaire","Prophétie"],secondary:["Musique magique","Guérison"],weaknesses:["Orgueil","Vision du futur fragmentaire"],traits:["Aura lumineuse","Voix harmonieuse"]},
+ {name:"Artémis",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Déesse de la chasse, de la nature sauvage et de la lune.",personality:"Indépendante, protectrice et déterminée.",powers:["Précision surnaturelle","Lien avec la nature"],secondary:["Camouflage","Agilité"],weaknesses:["Méfiance","Besoin de solitude"],traits:["Vision nocturne","Marques lunaires"]},
+ {name:"Aphrodite",origin:"Mythologie grecque",category:"Dieux et divinités",story:"Déesse de l'amour, du désir et de la beauté.",personality:"Magnétique, passionnée et sensible.",powers:["Charme surnaturel","Influence émotionnelle"],secondary:["Empathie","Illusions de beauté"],weaknesses:["Vanité","Émotions envahissantes"],traits:["Aura envoûtante","Parfum floral naturel"]},
+ {name:"Loki",origin:"Mythologie nordique",category:"Dieux et divinités",story:"Dieu farceur et métamorphe, aussi brillant qu'imprévisible.",personality:"Rusé, drôle et insaisissable.",powers:["Métamorphose","Illusions"],secondary:["Ruse surnaturelle","Magie du feu"],weaknesses:["Instabilité","Difficulté à faire confiance"],traits:["Yeux changeants","Ombre mouvante"]},
+ {name:"Thor",origin:"Mythologie nordique",category:"Dieux et divinités",story:"Dieu du tonnerre, protecteur associé à une force immense.",personality:"Franc, courageux et impulsif.",powers:["Foudre","Force divine"],secondary:["Endurance","Résistance aux éléments"],weaknesses:["Impulsivité","Colère"],traits:["Cheveux chargés d'électricité","Voix tonitruante"]},
+ {name:"Odin",origin:"Mythologie nordique",category:"Dieux et divinités",story:"Père de nombreux dieux, associé à la connaissance, la magie et la guerre.",personality:"Érudit, mystérieux et calculateur.",powers:["Magie runique","Clairvoyance"],secondary:["Sagesse ancienne","Communication avec les corbeaux"],weaknesses:["Quête obsessionnelle du savoir","Sacrifice"],traits:["Œil lumineux","Marques runiques"]},
+ {name:"Freya",origin:"Mythologie nordique",category:"Dieux et divinités",story:"Déesse associée à l'amour, à la magie seiðr et à la guerre.",personality:"Fière, indépendante et passionnée.",powers:["Magie seiðr","Charme magique"],secondary:["Prophétie","Lien avec les félins"],weaknesses:["Émotions intenses","Magie coûteuse"],traits:["Aura dorée","Yeux félins"]},
+ {name:"Anubis",origin:"Mythologie égyptienne",category:"Dieux et divinités",story:"Divinité liée aux rites funéraires et à la protection des défunts.",personality:"Calme, vigilant et impartial.",powers:["Perception des âmes","Magie funéraire"],secondary:["Sens aiguisés","Protection spirituelle"],weaknesses:["Lien aux lieux de passage","Devoir inflexible"],traits:["Yeux dorés","Ombre canine"]},
+ {name:"Isis",origin:"Mythologie égyptienne",category:"Dieux et divinités",story:"Déesse de la magie, de la protection et de la maternité.",personality:"Protectrice, savante et déterminée.",powers:["Magie protectrice","Guérison"],secondary:["Enchantements","Connaissance des secrets"],weaknesses:["Sacrifice de soi","Attachement profond"],traits:["Symboles ailés","Aura protectrice"]},
+ {name:"Ra",origin:"Mythologie égyptienne",category:"Dieux et divinités",story:"Dieu solaire dont le voyage quotidien symbolise le cycle du monde.",personality:"Majestueux, exigeant et lumineux.",powers:["Manipulation solaire","Lumière sacrée"],secondary:["Chaleur","Vision à longue distance"],weaknesses:["Éclipse","Épuisement nocturne"],traits:["Iris dorés","Peau chaude"]},
+ {name:"Amaterasu",origin:"Mythologie japonaise",category:"Dieux et divinités",story:"Déesse solaire et figure centrale du panthéon shinto.",personality:"Majestueuse, juste et lumineuse.",powers:["Lumière solaire","Purification"],secondary:["Illumination","Protection"],weaknesses:["Obscurité profonde","Blessures émotionnelles"],traits:["Cheveux lumineux","Aura solaire"]},
+ {name:"Morrigan",origin:"Mythologie celte",category:"Dieux et divinités",story:"Figure associée à la guerre, au destin et aux corbeaux.",personality:"Intimidante, indépendante et visionnaire.",powers:["Présages","Métamorphose en corbeau"],secondary:["Magie du destin","Intimidation"],weaknesses:["Présages difficiles à éviter","Isolement"],traits:["Plumes sombres","Ombre de corbeau"]},
+ {name:"Merlin",origin:"Légende arthurienne",category:"Sorciers et sorcières",story:"Enchanteur légendaire, conseiller des rois et gardien de savoirs anciens.",personality:"Sage, énigmatique et parfois excentrique.",powers:["Magie arcanique","Prophétie"],secondary:["Enchantements","Alchimie"],weaknesses:["Vision incomplète du futur","Fatigue magique"],traits:["Lueur dans les yeux","Symboles runiques"]},
+ {name:"Morgane",origin:"Légende arthurienne",category:"Sorciers et sorcières",story:"Enchanteresse puissante, parfois guérisseuse, parfois adversaire d'Arthur.",personality:"Ambivalente, intelligente et indépendante.",powers:["Magie féerique","Métamorphose"],secondary:["Guérison","Illusions"],weaknesses:["Ambition","Magie émotionnelle"],traits:["Cheveux changeants","Aura féerique"]},
+ {name:"Baba Yaga",origin:"Folklore slave",category:"Sorciers et sorcières",story:"Sorcière mystérieuse vivant dans une demeure mobile au cœur de la forêt.",personality:"Imprévisible, rusée et ancienne.",powers:["Magie des marais","Enchantements"],secondary:["Connaissance des plantes","Métamorphose"],weaknesses:["Règles anciennes","Territoire lié à la forêt"],traits:["Odeur de forêt","Ombre déformée"]},
+ {name:"La Fée Carabosse",origin:"Contes traditionnels",category:"Sorciers et sorcières",story:"Fée marraine redoutée dont les malédictions peuvent bouleverser un destin.",personality:"Susceptible, puissante et rancunière.",powers:["Malédictions","Magie féerique"],secondary:["Enchantements","Prémonitions"],weaknesses:["Serments magiques","Rancune"],traits:["Aura violette","Poussière magique sombre"]},
+ {name:"Arthur Pendragon",origin:"Légende arthurienne",category:"Héros et aventuriers",story:"Roi légendaire associé à Excalibur et à la quête d'un royaume uni.",personality:"Noble, courageux et idéaliste.",powers:["Légitimité sacrée","Maîtrise de l'épée"],secondary:["Leadership","Résistance mentale"],weaknesses:["Idéalisme","Poids du devoir"],traits:["Aura dorée","Marque en forme d'épée"]},
+ {name:"Hercule",origin:"Mythologie grecque",category:"Héros et aventuriers",story:"Héros célèbre pour sa force et les épreuves qu'il a surmontées.",personality:"Courageux, loyal et parfois impulsif.",powers:["Force surhumaine","Endurance héroïque"],secondary:["Résistance","Instinct de combat"],weaknesses:["Colère","Fierté"],traits:["Musculature exceptionnelle","Marques de force"]},
+ {name:"Persée",origin:"Mythologie grecque",category:"Héros et aventuriers",story:"Héros ayant vaincu Méduse grâce à son courage et à des objets divins.",personality:"Audacieux, ingénieux et déterminé.",powers:["Réflexes héroïques","Résistance aux malédictions"],secondary:["Précision","Sens tactique"],weaknesses:["Témérité","Dépendance aux artefacts"],traits:["Regard vif","Réflexes inhabituels"]},
+ {name:"Jeanne d'Arc",origin:"Histoire et légende française",category:"Héros et aventuriers",story:"Figure historique devenue symbole de foi, de courage et de résistance.",personality:"Déterminée, courageuse et idéaliste.",powers:["Conviction inébranlable","Vision inspirée"],secondary:["Leadership","Résistance mentale"],weaknesses:["Rigidité morale","Poids des responsabilités"],traits:["Aura lumineuse","Voix qui porte"]},
+ {name:"Robin des Bois",origin:"Légende anglaise",category:"Héros et aventuriers",story:"Archer hors pair qui lutte contre l'injustice et aide les plus démunis.",personality:"Malicieux, généreux et rebelle.",powers:["Précision exceptionnelle","Agilité"],secondary:["Camouflage","Sens de l'équité"],weaknesses:["Prise de risque","Loyauté excessive"],traits:["Vision perçante","Main sûre"]},
+ {name:"Alice",origin:"Lewis Carroll — Alice au pays des merveilles",category:"Héros et aventuriers",story:"Une jeune aventurière entraînée dans un monde où la logique se déforme.",personality:"Curieuse, vive et imaginative.",powers:["Altération de taille","Perception de l'absurde"],secondary:["Résistance aux illusions","Adaptabilité"],weaknesses:["Désorientation","Curiosité incontrôlable"],traits:["Reflets changeants","Présence étrange"]},
+ {name:"Peter Pan",origin:"J. M. Barrie",category:"Héros et aventuriers",story:"Garçon qui refuse de grandir et règne sur le Pays imaginaire.",personality:"Joueur, insouciant et fier.",powers:["Vol","Influence sur les rêves"],secondary:["Agilité","Magie féerique"],weaknesses:["Immaturité","Peur de grandir"],traits:["Ombre indépendante","Poussière lumineuse"]},
+ {name:"Dorothy",origin:"Le Magicien d'Oz — L. Frank Baum",category:"Héros et aventuriers",story:"Jeune fille emportée dans un monde merveilleux, qui cherche le chemin du retour.",personality:"Courageuse, loyale et optimiste.",powers:["Résistance aux enchantements","Orientation magique"],secondary:["Communication animale","Courage"],weaknesses:["Nostalgie","Attachement"],traits:["Éclat bleu dans les yeux","Affinité avec les chemins"]},
+ {name:"Sherlock Holmes",origin:"Arthur Conan Doyle",category:"Héros et aventuriers",story:"Détective célèbre pour son sens de la déduction et son observation minutieuse.",personality:"Analytique, réservé et exigeant.",powers:["Déduction exceptionnelle","Observation accrue"],secondary:["Mémoire détaillée","Dissimulation"],weaknesses:["Détachement émotionnel","Obsession intellectuelle"],traits:["Regard analytique","Mémoire sensorielle"]},
+ {name:"Le Chat du Cheshire",origin:"Lewis Carroll",category:"Monstres et créatures",story:"Créature énigmatique qui apparaît et disparaît à sa guise.",personality:"Moqueur, insaisissable et philosophe.",powers:["Invisibilité","Téléportation courte"],secondary:["Illusions","Désorientation"],weaknesses:["Instabilité","Difficulté à être pris au sérieux"],traits:["Sourire persistant","Yeux phosphorescents"]},
+ {name:"La Reine de Cœur",origin:"Lewis Carroll",category:"Méchants",story:"Souveraine tyrannique dont les colères sont aussi célèbres que ses sentences.",personality:"Autoritaire, théâtrale et impulsive.",powers:["Autorité magique","Manipulation des cartes"],secondary:["Illusions","Intimidation"],weaknesses:["Colère","Vanité"],traits:["Marques en forme de cœur","Aura rouge"]},
+ {name:"Le Comte de Monte-Cristo",origin:"Alexandre Dumas",category:"Héros et aventuriers",story:"Un homme qui renaît sous une nouvelle identité et prépare une vengeance patiente.",personality:"Calculateur, cultivé et tourmenté.",powers:["Stratégie exceptionnelle","Dissimulation"],secondary:["Maîtrise sociale","Mémoire remarquable"],weaknesses:["Obsession","Difficulté à pardonner"],traits:["Présence intimidante","Regard perçant"]},
+ {name:"Mulan",origin:"Légende chinoise",category:"Héros et aventuriers",story:"Jeune femme qui prend la place de son père dans l'armée.",personality:"Courageuse, loyale et ingénieuse.",powers:["Adaptation au combat","Discipline"],secondary:["Agilité","Stratégie"],weaknesses:["Doute de soi","Sens du sacrifice"],traits:["Réflexes précis","Résistance physique"]},
+ {name:"Aladdin",origin:"Les Mille et Une Nuits",category:"Héros et aventuriers",story:"Jeune homme débrouillard dont le destin croise celui d'un génie et d'une lampe magique.",personality:"Rusé, généreux et débrouillard.",powers:["Chance exceptionnelle","Sens des artefacts magiques"],secondary:["Agilité","Escamotage"],weaknesses:["Impulsivité","Tentations"],traits:["Mains agiles","Aura scintillante"]},
+ {name:"Sinbad",origin:"Les Mille et Une Nuits",category:"Héros et aventuriers",story:"Marin aventurier qui traverse des mers dangereuses et rencontre des merveilles.",personality:"Audacieux, curieux et persévérant.",powers:["Instinct de navigation","Résistance aux environnements extrêmes"],secondary:["Orientation","Chance en voyage"],weaknesses:["Goût du risque","Impatience"],traits:["Sens de l'orientation inné","Marques évoquant les vagues"]},
+ {name:"Le Petit Chaperon rouge",origin:"Charles Perrault / Frères Grimm",category:"Héros et aventuriers",story:"Une enfant dont la rencontre avec le loup est devenue un conte avertissant des dangers du chemin.",personality:"Curieuse, sociable et parfois imprudente.",powers:["Instinct de survie","Communication animale"],secondary:["Sens de l'odorat","Discrétion"],weaknesses:["Naïveté","Confiance rapide"],traits:["Ouïe fine","Sensibilité aux présences"]},
+ {name:"Barbe-Bleue",origin:"Charles Perrault",category:"Méchants",story:"Seigneur inquiétant dont le château cache un terrible secret.",personality:"Possessif, secret et manipulateur.",powers:["Magie des secrets","Aura intimidante"],secondary:["Dissimulation","Verrouillage magique"],weaknesses:["Paranoïa","Secrets qui le consument"],traits:["Barbe ou cheveux bleutés","Ombre froide"]},
+ {name:"Le Grand Méchant Loup",origin:"Folklore européen",category:"Monstres et créatures",story:"Prédateur rusé de nombreux contes, capable de tromper ses victimes.",personality:"Rusé, patient et opportuniste.",powers:["Métamorphose lupine","Sens surdéveloppés"],secondary:["Vitesse","Imitation vocale"],weaknesses:["Instinct prédateur","Lune ou feu selon la lignée"],traits:["Yeux de loup","Canines prononcées"]},
+ {name:"La Banshee",origin:"Folklore irlandais",category:"Monstres et créatures",story:"Esprit dont le cri annonce parfois une mort prochaine.",personality:"Mélancolique, distante et sensible.",powers:["Cri surnaturel","Perception des présages"],secondary:["Communication spirituelle","Invisibilité partielle"],weaknesses:["Émotions des autres","Présages inévitables"],traits:["Voix résonnante","Cheveux pâles"]},
+ {name:"Le Yéti",origin:"Folklore himalayen",category:"Monstres et créatures",story:"Créature mystérieuse associée aux sommets enneigés.",personality:"Solitaire, calme et protectrice.",powers:["Adaptation au froid","Force physique"],secondary:["Camouflage neigeux","Pistage"],weaknesses:["Chaleur extrême","Milieux urbains"],traits:["Pilosité claire","Empreintes inhabituelles"]},
+ {name:"Quetzalcoatl",origin:"Mythologie aztèque",category:"Dieux et divinités",story:"Divinité serpent à plumes associée au vent, au savoir et à la création.",personality:"Sage, généreux et puissant.",powers:["Maîtrise du vent","Métamorphose serpentine"],secondary:["Savoir ancien","Vol"],weaknesses:["Devoir sacré","Conflit entre nature divine et humaine"],traits:["Plumes irisées","Écailles fines"]},
+ {name:"Sun Wukong",origin:"Voyage vers l'Occident — Chine",category:"Héros et aventuriers",story:"Roi des singes, combattant espiègle doté de pouvoirs extraordinaires.",personality:"Rebelle, joueur et fier.",powers:["Métamorphose","Force surnaturelle"],secondary:["Clonage magique","Agilité","Immortalité légendaire"],weaknesses:["Orgueil","Impatience"],traits:["Yeux dorés","Queue ou réflexes simiesques"]},
+ {name:"Anansi",origin:"Folklore akan",category:"Dieux et divinités",story:"Araignée rusée, conteur et maître des stratagèmes.",personality:"Malin, bavard et inventif.",powers:["Tissage magique","Ruse surnaturelle"],secondary:["Illusions","Manipulation des fils"],weaknesses:["Excès de confiance","Pièges de ses propres plans"],traits:["Doigts fins","Motifs de toile"]},
+ {name:"Mowgli",origin:"Le Livre de la jungle — Rudyard Kipling",category:"Héros et aventuriers",story:"Enfant élevé parmi les loups et lié profondément à la jungle.",personality:"Libre, loyal et instinctif.",powers:["Communication animale","Adaptation sauvage"],secondary:["Agilité","Pistage"],weaknesses:["Difficulté avec les codes sociaux","Attachement à la jungle"],traits:["Sens aiguisés","Démarche silencieuse"]},
+ {name:"D'Artagnan",origin:"Les Trois Mousquetaires — Alexandre Dumas",category:"Héros et aventuriers",story:"Jeune homme ambitieux qui rejoint les mousquetaires et défend ses compagnons.",personality:"Fougueux, loyal et courageux.",powers:["Escrime exceptionnelle","Réflexes rapides"],secondary:["Charisme","Équitation"],weaknesses:["Impulsivité","Fierté"],traits:["Main sûre","Sens de l'honneur"]},
+ {name:"La Lorelei",origin:"Légendes rhénanes allemandes",category:"Monstres et créatures",story:"Figure mystérieuse associée à un rocher du Rhin et à un chant envoûtant.",personality:"Mélancolique, séduisante et insaisissable.",powers:["Chant hypnotique","Magie aquatique"],secondary:["Illusions","Communication marine"],weaknesses:["Voix liée aux émotions","Eau profonde"],traits:["Voix cristalline","Reflets argentés"]},
+ {name:"Le Fantôme de l'Opéra",origin:"Gaston Leroux",category:"Monstres et créatures",story:"Génie musical vivant dans les profondeurs d'un opéra, entre amour et obsession.",personality:"Brillant, secret et tourmenté.",powers:["Maîtrise musicale","Dissimulation"],secondary:["Acoustique surnaturelle","Illusions sonores"],weaknesses:["Isolement","Obsession"],traits:["Ouïe exceptionnelle","Voix singulière"]}
+];
+
+const categories = ["Tous","Princes et princesses","Méchants","Dieux et divinités","Monstres et créatures","Héros et aventuriers","Sorciers et sorcières"];
+const STORE_KEY = "legacyAcademyState_v1";
+const REQUEST_KEY = "legacyAcademyRequests_v1";
+const CHARACTER_KEY = "legacyAcademyCharacters_v1";
+let state = loadState();
+let activeCategory = "Tous";
+let selectedProfile = null;
+let lastInheritance = null;
+
+function loadState(){
+  try{
+    const saved = localStorage.getItem(STORE_KEY);
+    if(saved){
+      const parsed = JSON.parse(saved);
+      // Merge seed additions without resetting already generated descendant counts.
+      parentSeed.forEach(seed=>{
+        if(!parsed.parents.some(p=>p.name===seed.name)){
+          parsed.parents.push({...seed,children:Math.floor(Math.random()*4)});
+        }
+      });
+      return parsed;
+    }
+  }catch(e){}
+  const parents = parentSeed.map(p=>({...p,children:Math.floor(Math.random()*4)}));
+  const initial = {parents};
+  localStorage.setItem(STORE_KEY,JSON.stringify(initial));
+  return initial;
+}
+function saveState(){localStorage.setItem(STORE_KEY,JSON.stringify(state));}
+function getRequests(){try{return JSON.parse(localStorage.getItem(REQUEST_KEY)||"[]")}catch(e){return []}}
+function saveRequests(v){localStorage.setItem(REQUEST_KEY,JSON.stringify(v))}
+function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display="none",3000)}
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function statusFor(p){if(p.children>=3)return ["Complet","full"];if(!p.available)return ["Indisponible",""];if(p.children>0)return ["Partiellement réservé",""];return ["Disponible",""]}
+function renderFilters(){
+  document.getElementById("categoryFilters").innerHTML=categories.map(c=>`<button class="filter ${activeCategory===c?"active":""}" data-cat="${escapeHTML(c)}">${escapeHTML(c)}</button>`).join("");
+  document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.cat;renderFilters();renderParents()}));
+}
+function renderParents(){
+  const q=document.getElementById("searchInput").value.toLowerCase().trim();
+  const sf=document.getElementById("statusFilter").value;
+  const list=state.parents.filter(p=>{
+    const st=statusFor(p)[1];
+    const matchesCat=activeCategory==="Tous"||p.category===activeCategory||(activeCategory==="Héros et aventuriers"&&p.category==="Héros");
+    const matchesQ=[p.name,p.origin,p.category].join(" ").toLowerCase().includes(q);
+    const matchesStatus=sf==="all"||(sf==="available"&&p.available&&p.children<3)||(sf==="full"&&p.children>=3)||(sf==="excluded"&&!p.available);
+    return matchesCat&&matchesQ&&matchesStatus;
+  });
+  document.getElementById("parentCards").innerHTML=list.length?list.map(p=>{
+    const [st,cl]=statusFor(p);
+    return `<article class="parent-card"><div class="card-category">${escapeHTML(p.category)}</div><h3>${escapeHTML(p.name)}</h3><div class="origin">${escapeHTML(p.origin)}</div><div class="card-bottom"><div><div class="count">${p.children}/3 descendants</div><span class="status ${cl}">${st}</span></div><button class="btn small" data-profile="${escapeHTML(p.name)}">Découvrir</button></div></article>`
+  }).join(""):`<div class="empty">Aucun parent ne correspond à votre recherche.</div>`;
+  document.querySelectorAll("[data-profile]").forEach(b=>b.addEventListener("click",()=>openProfile(b.dataset.profile)));
+}
+function openProfile(name){
+  const p=state.parents.find(x=>x.name===name);if(!p)return;selectedProfile=name;
+  const [st]=statusFor(p);
+  document.getElementById("modalName").textContent=p.name;
+  document.getElementById("modalOrigin").textContent=p.origin+" · "+p.category;
+  document.getElementById("modalBody").innerHTML=`
+    <h3>Son histoire</h3><p>${escapeHTML(p.story)}</p>
+    <h3>Personnalité</h3><p>${escapeHTML(p.personality)}</p>
+    <h3>Pouvoirs principaux</h3><ul>${p.powers.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>
+    <h3>Capacités secondaires</h3><ul>${p.secondary.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>
+    <h3>Faiblesses possibles</h3><ul>${p.weaknesses.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>
+    <h3>Caractéristiques transmissibles</h3><ul>${p.traits.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>
+    <div class="notice">Descendants : <strong>${p.children}/3</strong> · Places restantes : <strong>${Math.max(0,3-p.children)}</strong> · Statut : <strong>${st}</strong></div>`;
+  const reserve=document.getElementById("reserveButton");
+  reserve.disabled=!p.available||p.children>=3;
+  reserve.textContent=reserve.disabled?"Réservation indisponible":"Demander une réservation";
+  reserve.style.opacity=reserve.disabled?".5":"1";
+  document.getElementById("parentModal").classList.add("open");
+}
+function closeModal(){document.getElementById("parentModal").classList.remove("open")}
+function requestReservation(){
+  const p=state.parents.find(x=>x.name===selectedProfile);if(!p||!p.available||p.children>=3)return;
+  const player=prompt("Quel est le prénom ou pseudo du joueur ?");
+  if(!player||!player.trim())return;
+  const req=getRequests();req.push({id:Date.now(),player:player.trim(),parent:p.name,status:"En attente",date:new Date().toLocaleDateString("fr-FR")});saveRequests(req);
+  toast("Demande envoyée (dans cette démonstration locale).");renderAdmin();closeModal();
+}
+function drawRandom(){
+  const count=Number(document.getElementById("drawCount").value);
+  const availableOnly=document.getElementById("drawAvailable").checked;
+  let pool=state.parents.filter(p=>p.random!==false&&p.children<3&&(!availableOnly||p.available));
+  if(pool.length<count){toast("Il n'y a pas assez de parents éligibles pour ce tirage.");return}
+  const chosen=[];
+  while(chosen.length<count){const i=Math.floor(Math.random()*pool.length);chosen.push(pool.splice(i,1)[0])}
+  showDraw(chosen);
+}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function uniqueRandom(arr,n){const a=[...new Set(arr)],out=[];while(a.length&&out.length<n){out.push(a.splice(Math.floor(Math.random()*a.length),1)[0])}return out}
+function makeInheritance(chosen){
+  const allP=chosen.flatMap(p=>p.powers),allS=chosen.flatMap(p=>p.secondary),allW=chosen.flatMap(p=>p.weaknesses),allT=chosen.flatMap(p=>p.traits);
+  let combo=chosen.length===2?pick([
+    `Une manifestation hybride mêlant ${chosen[0].name} et ${chosen[1].name}.`,
+    `Une capacité rare née de la rencontre des héritages de ${chosen[0].name} et ${chosen[1].name}.`,
+    `Une magie instable qui combine certains aspects des deux lignées.`
+  ]):"";
+  return {main:pick(allP),secondary:uniqueRandom(allS,Math.min(2,allS.length)),weakness:pick(allW),trait:pick(allT),combo};
+}
+function showDraw(chosen){
+  const h=makeInheritance(chosen);
+  document.getElementById("drawResult").innerHTML=`
+    <div class="eyebrow">Le hasard a parlé</div><h3>Votre lignée</h3>
+    ${chosen.map(p=>`<div class="result-parent"><strong>${escapeHTML(p.name)}</strong><div class="origin">${escapeHTML(p.origin)}</div><small class="muted">${p.children}/3 descendants actuellement</small></div>`).join("")}
+    <h3 style="margin-top:20px">Votre héritage possible</h3>
+    ${inheritanceHTML(h)}
+    <button class="btn secondary" id="redrawInline" style="margin-top:18px">Tenter un nouveau tirage</button>`;
+  document.getElementById("redrawInline").addEventListener("click",drawRandom);
+}
+function inheritanceHTML(h){return `<div class="magic-list"><div class="magic-item"><b>Pouvoir principal</b><span>${escapeHTML(h.main)}</span></div><div class="magic-item"><b>Pouvoirs secondaires</b><span>${h.secondary.map(escapeHTML).join(", ")||"À découvrir"}</span></div><div class="magic-item"><b>Faiblesse</b><span>${escapeHTML(h.weakness)}</span></div><div class="magic-item"><b>Particularité</b><span>${escapeHTML(h.trait)}</span></div></div>${h.combo?`<p class="notice">${escapeHTML(h.combo)}</p>`:""}`}
+function renderParentPicks(){
+  const count=Number(document.getElementById("charParents").value);
+  const eligible=state.parents.filter(p=>p.available&&p.children<3);
+  document.getElementById("parentPicks").innerHTML=eligible.map(p=>`<label><input type="checkbox" name="charParent" value="${escapeHTML(p.name)}"> ${escapeHTML(p.name)} <span class="muted">(${p.children}/3)</span></label>`).join("");
+  document.getElementById("parentPicks").dataset.max=count;
+  document.querySelectorAll('input[name="charParent"]').forEach(ch=>ch.addEventListener("change",()=>{
+    const checked=[...document.querySelectorAll('input[name="charParent"]:checked')];
+    if(checked.length>count){ch.checked=false;toast(`Choisissez ${count} parent(s) maximum.`)}
+    lastInheritance=null;document.getElementById("charInheritance").textContent="Votre sélection a changé. Générez à nouveau votre héritage.";
+  }));
+}
+function selectedCharacterParents(){return [...document.querySelectorAll('input[name="charParent"]:checked')].map(ch=>state.parents.find(p=>p.name===ch.value)).filter(Boolean)}
+function generateCharacterInheritance(){
+  const chosen=selectedCharacterParents(),required=Number(document.getElementById("charParents").value);
+  if(chosen.length!==required){toast(`Veuillez sélectionner exactement ${required} parent(s).`);return}
+  lastInheritance=makeInheritance(chosen);
+  document.getElementById("charInheritance").innerHTML=inheritanceHTML(lastInheritance);
+}
+function saveCharacter(e){
+  e.preventDefault();
+  const chosen=selectedCharacterParents(),required=Number(document.getElementById("charParents").value);
+  if(chosen.length!==required){toast(`Sélectionnez exactement ${required} parent(s).`);return}
+  if(!lastInheritance){toast("Générez d'abord l'héritage de votre personnage.");return}
+  const character={id:Date.now(),name:document.getElementById("charName").value.trim(),nickname:document.getElementById("charNickname").value.trim(),age:document.getElementById("charAge").value,parents:chosen.map(p=>p.name),inheritance:lastInheritance,appearance:document.getElementById("charAppearance").value,personality:document.getElementById("charPersonality").value,legacy:document.getElementById("charLegacy").value,dream:document.getElementById("charDream").value,secret:document.getElementById("charSecret").value};
+  const all=JSON.parse(localStorage.getItem(CHARACTER_KEY)||"[]");all.push(character);localStorage.setItem(CHARACTER_KEY,JSON.stringify(all));
+  toast("Fiche enregistrée sur cet appareil (démo).");document.getElementById("characterForm").reset();lastInheritance=null;document.getElementById("charInheritance").textContent="Sélectionnez vos parents pour générer un nouvel héritage.";renderParentPicks();
+}
+function renderAdmin(){
+  const req=getRequests();
+  document.getElementById("reservationAdmin").innerHTML=req.length?req.map(r=>`<div class="admin-row"><div><strong>${escapeHTML(r.player)}</strong><small>${escapeHTML(r.parent)} · ${escapeHTML(r.date)} · ${escapeHTML(r.status)}</small></div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==="En attente"?`<button class="btn small" data-approve="${r.id}">Valider</button><button class="btn small danger" data-reject="${r.id}">Refuser</button>`:""}</div></div>`).join(""):`<p class="muted">Aucune demande pour le moment.</p>`;
+  document.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>reviewRequest(Number(b.dataset.approve),true)));
+  document.querySelectorAll("[data-reject]").forEach(b=>b.addEventListener("click",()=>reviewRequest(Number(b.dataset.reject),false)));
+  document.getElementById("parentAdmin").innerHTML=state.parents.map(p=>`<div class="admin-row"><div style="flex:1;min-width:180px"><strong>${escapeHTML(p.name)}</strong><small>Réservation : ${p.available?"oui":"non"} · Tirage : ${p.random===false?"non":"oui"}</small></div><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><label style="font-size:11px;color:var(--gold2)">Descendants <input class="field" style="width:72px;min-width:72px;padding:7px" type="number" min="0" max="3" value="${p.children}" data-count="${escapeHTML(p.name)}" aria-label="Nombre de descendants de ${escapeHTML(p.name)}"></label><button class="btn small" data-count-save="${escapeHTML(p.name)}">Enregistrer</button><button class="btn small secondary" data-avail="${escapeHTML(p.name)}">${p.available?"Désactiver":"Activer"}</button><button class="btn small secondary" data-random="${escapeHTML(p.name)}">${p.random===false?"Inclure au tirage":"Exclure du tirage"}</button></div></div>`).join("");
+  document.querySelectorAll("[data-count-save]").forEach(b=>b.addEventListener("click",async()=>{const name=b.dataset.countSave;const input=document.querySelector(`[data-count="${CSS.escape(name)}"]`);const value=Number(input.value);if(!Number.isInteger(value)||value<0||value>3){toast("Le nombre doit être compris entre 0 et 3.");return}const p=state.parents.find(x=>x.name===name);p.children=value;try{await saveParentSetting(p);saveState();renderAll();toast("Nombre de descendants mis à jour.")}catch(e){toast("Enregistrement impossible : vérifiez la configuration Supabase.")}}));
+  document.querySelectorAll("[data-avail]").forEach(b=>b.addEventListener("click",async()=>{const p=state.parents.find(x=>x.name===b.dataset.avail);p.available=!p.available;try{await saveParentSetting(p);saveState();renderAll()}catch(e){p.available=!p.available;toast("Enregistrement impossible.")}}));
+  document.querySelectorAll("[data-random]").forEach(b=>b.addEventListener("click",async()=>{const p=state.parents.find(x=>x.name===b.dataset.random);p.random=p.random===false?true:false;try{await saveParentSetting(p);saveState();renderAll()}catch(e){p.random=p.random===false?true:false;toast("Enregistrement impossible.")}}));
+}
+function reviewRequest(id,approve){
+  const req=getRequests(),r=req.find(x=>x.id===id);if(!r)return;
+  if(approve){const p=state.parents.find(x=>x.name===r.parent);if(!p||p.children>=3){toast("Impossible : ce parent a atteint sa limite.");return}p.children++;r.status="Validée";saveState()}else r.status="Refusée";
+  saveRequests(req);renderAll();toast(approve?"Réservation validée.":"Demande refusée.");
+}
+async function saveParentSetting(p){
+  if(!supabaseClient||!staffUser)throw new Error("Staff non authentifié");
+  const {error}=await supabaseClient.from("parent_settings").upsert({parent_name:p.name,children:p.children,available:p.available,random_enabled:p.random!==false,updated_at:new Date().toISOString()},{onConflict:"parent_name"});
+  if(error)throw error;
+}
+async function loadPublicParentSettings(){
+  if(!supabaseClient)return;
+  const {data,error}=await supabaseClient.from("parent_settings").select("parent_name,children,available,random_enabled");
+  if(error){console.warn("Paramètres publics non chargés",error);return}
+  (data||[]).forEach(row=>{const p=state.parents.find(x=>x.name===row.parent_name);if(p){p.children=row.children;p.available=row.available;p.random=row.random_enabled}});
+  saveState();renderAll();
+}
+function showStaffAccess(){const section=document.getElementById("staff");section.classList.remove("hidden");section.scrollIntoView({behavior:"smooth"});}
+async function verifyStaffSession(){
+  if(!supabaseClient)return;
+  const {data:{session}}=await supabaseClient.auth.getSession();
+  if(!session)return;
+  const {data,error}=await supabaseClient.from("staff_members").select("user_id").eq("user_id",session.user.id).maybeSingle();
+  if(error||!data){await supabaseClient.auth.signOut();return}
+  staffUser=session.user;document.getElementById("staffLoginPanel").classList.add("hidden");document.getElementById("staffDashboard").classList.remove("hidden");
+  // Synchronise les personnages de la version actuelle avec la base au premier accès.
+  const rows=state.parents.map(p=>({parent_name:p.name,children:p.children,available:p.available,random_enabled:p.random!==false}));
+  const {error:seedError}=await supabaseClient.from("parent_settings").upsert(rows,{onConflict:"parent_name",ignoreDuplicates:true});
+  if(seedError)console.warn(seedError);
+  await loadPublicParentSettings();renderAll();
+}
+async function initStaffBackend(){
+  const staffRequested=new URLSearchParams(location.search).get("staff")==="1";
+  if(staffRequested)showStaffAccess();
+  if(SUPABASE_URL.startsWith("https://")&&(SUPABASE_ANON_KEY.startsWith("ey")||SUPABASE_ANON_KEY.startsWith("sb_publishable_"))&&window.supabase){
+    supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    await loadPublicParentSettings();
+    if(staffRequested)await verifyStaffSession();
+    supabaseClient.auth.onAuthStateChange(()=>{if(staffRequested)setTimeout(verifyStaffSession,0)});
+  }else if(staffRequested){document.getElementById("staffLoginMessage").textContent="Le site doit d’abord être relié à Supabase. Suivez le guide README.";}
+}
+document.getElementById("staffLoginForm").addEventListener("submit",async e=>{
+  e.preventDefault();const message=document.getElementById("staffLoginMessage");
+  if(!supabaseClient){message.textContent="Supabase n’est pas encore configuré. Consultez le guide README.";return}
+  message.textContent="Connexion…";
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email:document.getElementById("staffEmail").value.trim(),password:document.getElementById("staffPassword").value});
+  if(error){message.textContent="Identifiants incorrects ou compte non configuré.";return}
+  const {data:staff,error:roleError}=await supabaseClient.from("staff_members").select("user_id").eq("user_id",data.user.id).maybeSingle();
+  if(roleError||!staff){await supabaseClient.auth.signOut();message.textContent="Ce compte n’a pas les droits staff.";return}
+  staffUser=data.user;document.getElementById("staffLoginPanel").classList.add("hidden");document.getElementById("staffDashboard").classList.remove("hidden");
+  const rows=state.parents.map(p=>({parent_name:p.name,children:p.children,available:p.available,random_enabled:p.random!==false}));
+  const {error:seedError}=await supabaseClient.from("parent_settings").upsert(rows,{onConflict:"parent_name",ignoreDuplicates:true});
+  if(seedError)toast("Connexion réussie, mais synchronisation incomplète.");
+  await loadPublicParentSettings();renderAll();
+});
+document.getElementById("staffLogout").addEventListener("click",async()=>{if(supabaseClient)await supabaseClient.auth.signOut();staffUser=null;document.getElementById("staffDashboard").classList.add("hidden");document.getElementById("staffLoginPanel").classList.remove("hidden");document.getElementById("staffLoginForm").reset();});
+function renderAll(){renderParents();if(staffUser)renderAdmin();renderParentPicks()}
+document.getElementById("searchInput").addEventListener("input",renderParents);
+document.getElementById("statusFilter").addEventListener("change",renderParents);
+document.getElementById("drawButton").addEventListener("click",drawRandom);
+document.getElementById("charParents").addEventListener("change",renderParentPicks);
+document.getElementById("inheritButton").addEventListener("click",generateCharacterInheritance);
+document.getElementById("characterForm").addEventListener("submit",saveCharacter);
+document.getElementById("reserveButton").addEventListener("click",requestReservation);
+document.getElementById("modalClose").addEventListener("click",closeModal);
+document.getElementById("modalDone").addEventListener("click",closeModal);
+document.getElementById("parentModal").addEventListener("click",e=>{if(e.target.id==="parentModal")closeModal()});
+document.getElementById("menuToggle").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("open"));
+document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("open")));
+renderFilters();renderAll();initStaffBackend();
+</script>
+</body>
+</html>
