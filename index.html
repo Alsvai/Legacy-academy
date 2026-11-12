@@ -27,7 +27,7 @@ a{color:var(--gold2)}button,input,select,textarea{font:inherit}button{cursor:poi
     <a class="brand" href="#home">THE LEGACY ACADEMY</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="#academy">L'académie</a><a href="#directory">Les lignées</a><a href="#draw">Tirage</a><a href="#character">Créer un élève</a><a href="#rules">Règlement</a><a href="#staff">Staff</a>
+      <a href="#academy">L'académie</a><a href="#directory">Les lignées</a><a href="#draw">Tirage</a><a href="#character">Créer un élève</a><a href="#rules">Règlement</a>
     </div>
   </nav>
 </header>
@@ -105,7 +105,7 @@ a{color:var(--gold2)}button,input,select,textarea{font:inherit}button{cursor:poi
         <div class="form-group full"><label for="charSecret">Secret</label><textarea class="field" id="charSecret" placeholder="Un secret qu'il garde pour lui…"></textarea></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><button class="btn" type="submit">Enregistrer cette fiche (démo)</button><button class="btn secondary" type="reset">Effacer</button></div>
-      <p class="notice">Les fiches sont enregistrées localement dans cette version de démonstration. Elles ne sont pas encore envoyées au staff.</p>
+      <p class="notice">Les fiches sont enregistrées localement sur cet appareil dans cette version. Elles ne sont pas encore partagées avec le staff.</p>
     </form>
   </div>
 </section>
@@ -122,12 +122,28 @@ a{color:var(--gold2)}button,input,select,textarea{font:inherit}button{cursor:poi
   </div>
 </section>
 
-<section class="section" id="staff">
-  <div class="section-head"><div class="eyebrow">Administration</div><h2>Espace staff — démonstration</h2><div class="divider"></div><p>Gérez les demandes de réservation et les paramètres du répertoire depuis cette interface locale.</p></div>
-  <div class="panel">
-    <div class="notice"><strong>Important :</strong> cet espace est une maquette fonctionnelle locale, sans authentification sécurisée. Ne l'utilisez pas avec de vraies données sensibles. Une base de données et des règles d'accès serveur seront nécessaires pour une vraie équipe.</div>
-    <h3>Demandes de réservation</h3><div class="admin-list" id="reservationAdmin"><p class="muted">Aucune demande pour le moment.</p></div>
-    <h3 style="margin-top:28px">Gestion des parents</h3><div class="admin-list" id="parentAdmin"></div>
+<section class="section hidden" id="staff">
+  <div class="section-head"><div class="eyebrow">Administration privée</div><h2>Espace staff</h2><div class="divider"></div><p>Accès réservé aux membres autorisés de l'équipe.</p></div>
+  <div class="panel" id="staffLoginPanel">
+    <h3>Connexion du personnel</h3>
+    <p class="muted">Connectez-vous avec le compte staff qui vous a été attribué.</p>
+    <form id="staffLoginForm" class="form-grid">
+      <div class="form-group"><label for="staffEmail">Adresse e-mail</label><input class="field" id="staffEmail" type="email" autocomplete="username" required></div>
+      <div class="form-group"><label for="staffPassword">Mot de passe</label><input class="field" id="staffPassword" type="password" autocomplete="current-password" required></div>
+      <div class="form-group full"><button class="btn" type="submit">Se connecter</button></div>
+      <p class="notice form-group full" id="staffLoginMessage">L'accès est vérifié par Supabase. Aucun mot de passe n'est stocké dans le site.</p>
+    </form>
+  </div>
+  <div class="panel hidden" id="staffDashboard">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div><h3>Tableau de bord</h3><p class="muted" id="staffIdentity"></p></div>
+      <button class="btn secondary small" id="staffLogout" type="button">Se déconnecter</button>
+    </div>
+    <div class="notice">Les modifications des lignées sont enregistrées dans Supabase et visibles par tous les visiteurs après actualisation.</div>
+    <h3>Gestion des parents</h3>
+    <p class="muted">Modifiez le nombre de descendants (de 0 à 3), l'accès aux réservations et la présence dans le tirage aléatoire.</p>
+    <div class="admin-list" id="parentAdmin"></div>
+    <p class="notice" id="staffDataMessage">Chargement des données partagées…</p>
   </div>
 </section>
 </main>
@@ -143,6 +159,7 @@ a{color:var(--gold2)}button,input,select,textarea{font:inherit}button{cursor:poi
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ============================================================
 // DONNÉES DES PARENTS — AJOUTEZ OU MODIFIEZ LES PERSONNAGES ICI
@@ -227,6 +244,15 @@ let activeCategory = "Tous";
 let selectedProfile = null;
 let lastInheritance = null;
 
+// Configuration publique Supabase : remplacez ces deux valeurs par celles du projet.
+// La clé anon est destinée au navigateur ; la sécurité repose sur les règles RLS SQL.
+const SUPABASE_URL = "https://VOTRE-PROJET.supabase.co";
+const SUPABASE_ANON_KEY = "VOTRE_CLE_ANON";
+let supabaseClient = null;
+let staffUser = null;
+const staffMode = new URLSearchParams(location.search).get("staff") === "1";
+
+
 function loadState(){
   try{
     const saved = localStorage.getItem(STORE_KEY);
@@ -247,6 +273,96 @@ function loadState(){
   return initial;
 }
 function saveState(){localStorage.setItem(STORE_KEY,JSON.stringify(state));}
+function supabaseConfigured(){
+  return window.supabase && SUPABASE_URL.startsWith("https://") &&
+    !SUPABASE_URL.includes("VOTRE-PROJET") && !SUPABASE_ANON_KEY.includes("VOTRE_CLE");
+}
+function initSupabase(){
+  if(!supabaseConfigured()) return false;
+  supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  return true;
+}
+function setStaffMessage(message,isError=false){
+  const el=document.getElementById("staffDataMessage");
+  if(el){el.textContent=message;el.style.color=isError?"#f1a4a4":"var(--muted)";}
+}
+function showStaffLogin(message=""){
+  document.getElementById("staffLoginPanel").classList.remove("hidden");
+  document.getElementById("staffDashboard").classList.add("hidden");
+  if(message) document.getElementById("staffLoginMessage").textContent=message;
+}
+function showStaffDashboard(user){
+  staffUser=user;
+  document.getElementById("staffLoginPanel").classList.add("hidden");
+  document.getElementById("staffDashboard").classList.remove("hidden");
+  document.getElementById("staffIdentity").textContent="Connecté : "+(user.email||"membre du staff");
+}
+async function loadSharedParents(){
+  if(!supabaseClient) return;
+  const {data,error}=await supabaseClient.from("parents").select("*").order("name");
+  if(error) throw error;
+  if(data && data.length){
+    const localByName=new Map(state.parents.map(p=>[p.name,p]));
+    state.parents=data.map(row=>({...localByName.get(row.name),...row}));
+    saveState();
+  } else if(staffUser) {
+    // Initialisation du répertoire uniquement par un membre staff connecté.
+    const rows=state.parents.map(p=>({name:p.name,origin:p.origin,category:p.category,story:p.story,personality:p.personality,powers:p.powers,secondary:p.secondary,weaknesses:p.weaknesses,traits:p.traits,children:p.children,available:p.available!==false,random:p.random!==false}));
+    const {error:insertError}=await supabaseClient.from("parents").upsert(rows,{onConflict:"name",ignoreDuplicates:true});
+    if(insertError) throw insertError;
+    const {data:reloaded,error:reloadError}=await supabaseClient.from("parents").select("*").order("name");
+    if(reloadError) throw reloadError;
+    if(reloaded) state.parents=reloaded.map(row=>({...row}));
+    saveState();
+  }
+  renderAll();
+}
+async function persistParent(name,changes){
+  if(!supabaseClient) throw new Error("Supabase n'est pas configuré. Consultez le README.");
+  const {data,error}=await supabaseClient.from("parents").update(changes).eq("name",name).select().single();
+  if(error) throw error;
+  const index=state.parents.findIndex(p=>p.name===name);
+  if(index>=0) state.parents[index]={...state.parents[index],...data};
+  saveState();renderParents();renderAdmin();
+}
+async function startStaff(){
+  if(!staffMode) return;
+  const section=document.getElementById("staff");
+  section.classList.remove("hidden");
+  if(!initSupabase()){
+    showStaffLogin("Supabase n'est pas encore configuré. Remplacez SUPABASE_URL et SUPABASE_ANON_KEY dans index.html, puis configurez la base avec supabase/schema.sql.");
+    document.getElementById("staffLoginForm").querySelector("button").disabled=true;
+    return;
+  }
+  const {data:{session}}=await supabaseClient.auth.getSession();
+  if(session){
+    const {data:{user}}=await supabaseClient.auth.getUser();
+    const role=user?.app_metadata?.role;
+    if(role==="staff"){
+      showStaffDashboard(user);
+      try{await loadSharedParents();setStaffMessage("Données partagées chargées.");}
+      catch(e){setStaffMessage("Impossible de charger les parents : "+e.message,true);}
+    } else {
+      await supabaseClient.auth.signOut();
+      showStaffLogin("Ce compte n'a pas les droits staff.");
+    }
+  }
+  supabaseClient.auth.onAuthStateChange(async(event,session)=>{
+    if(event==="SIGNED_IN" && session){
+      const {data:{user}}=await supabaseClient.auth.getUser();
+      if(user?.app_metadata?.role!=="staff"){
+        await supabaseClient.auth.signOut();
+        showStaffLogin("Ce compte n'a pas les droits staff.");
+        return;
+      }
+      showStaffDashboard(user);
+      try{await loadSharedParents();setStaffMessage("Données partagées chargées.");}
+      catch(e){setStaffMessage("Erreur de chargement : "+e.message,true);}
+    }
+    if(event==="SIGNED_OUT"){staffUser=null;showStaffLogin();}
+  });
+}
+
 function getRequests(){try{return JSON.parse(localStorage.getItem(REQUEST_KEY)||"[]")}catch(e){return []}}
 function saveRequests(v){localStorage.setItem(REQUEST_KEY,JSON.stringify(v))}
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display="none",3000)}
@@ -358,13 +474,40 @@ function saveCharacter(e){
   toast("Fiche enregistrée sur cet appareil (démo).");document.getElementById("characterForm").reset();lastInheritance=null;document.getElementById("charInheritance").textContent="Sélectionnez vos parents pour générer un nouvel héritage.";renderParentPicks();
 }
 function renderAdmin(){
-  const req=getRequests();
-  document.getElementById("reservationAdmin").innerHTML=req.length?req.map(r=>`<div class="admin-row"><div><strong>${escapeHTML(r.player)}</strong><small>${escapeHTML(r.parent)} · ${escapeHTML(r.date)} · ${escapeHTML(r.status)}</small></div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==="En attente"?`<button class="btn small" data-approve="${r.id}">Valider</button><button class="btn small danger" data-reject="${r.id}">Refuser</button>`:""}</div></div>`).join(""):`<p class="muted">Aucune demande pour le moment.</p>`;
-  document.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>reviewRequest(Number(b.dataset.approve),true)));
-  document.querySelectorAll("[data-reject]").forEach(b=>b.addEventListener("click",()=>reviewRequest(Number(b.dataset.reject),false)));
-  document.getElementById("parentAdmin").innerHTML=state.parents.map(p=>`<div class="admin-row"><div><strong>${escapeHTML(p.name)}</strong><small>${p.children}/3 descendants · réservation : ${p.available?"oui":"non"} · tirage : ${p.random===false?"non":"oui"}</small></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small secondary" data-avail="${escapeHTML(p.name)}">${p.available?"Désactiver":"Activer"}</button><button class="btn small secondary" data-random="${escapeHTML(p.name)}">${p.random===false?"Inclure au tirage":"Exclure du tirage"}</button></div></div>`).join("");
-  document.querySelectorAll("[data-avail]").forEach(b=>b.addEventListener("click",()=>{const p=state.parents.find(x=>x.name===b.dataset.avail);p.available=!p.available;saveState();renderAll()}));
-  document.querySelectorAll("[data-random]").forEach(b=>b.addEventListener("click",()=>{const p=state.parents.find(x=>x.name===b.dataset.random);p.random=p.random===false?true:false;saveState();renderAll()}));
+  const container=document.getElementById("parentAdmin");
+  if(!container) return;
+  if(!staffUser){container.innerHTML='<p class="muted">Connectez-vous pour gérer les lignées.</p>';return;}
+  container.innerHTML=state.parents.map(p=>`<div class="admin-row">
+    <div style="flex:1;min-width:180px"><strong>${escapeHTML(p.name)}</strong><small>Maximum : 3 descendants</small></div>
+    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+      <label style="font-size:11px;color:var(--gold2)">Descendants
+        <input class="field" style="width:76px;min-width:76px;padding:7px" type="number" min="0" max="3" value="${Math.max(0,Math.min(3,Number(p.children)||0))}" data-child-count="${escapeHTML(p.name)}" aria-label="Nombre de descendants pour ${escapeHTML(p.name)}">
+      </label>
+      <button class="btn small" data-save-children="${escapeHTML(p.name)}">Enregistrer</button>
+      <button class="btn small secondary" data-avail="${escapeHTML(p.name)}">${p.available?"Désactiver":"Activer"}</button>
+      <button class="btn small secondary" data-random="${escapeHTML(p.name)}">${p.random===false?"Inclure au tirage":"Exclure du tirage"}</button>
+    </div>
+  </div>`).join("");
+  container.querySelectorAll("[data-save-children]").forEach(b=>b.addEventListener("click",async()=>{
+    const name=b.dataset.saveChildren;
+    const input=container.querySelector(`[data-child-count="${CSS.escape(name)}"]`);
+    const value=Number(input.value);
+    if(!Number.isInteger(value)||value<0||value>3){toast("Le nombre doit être compris entre 0 et 3.");return;}
+    b.disabled=true;b.textContent="Enregistrement…";
+    try{await persistParent(name,{children:value});toast("Nombre de descendants mis à jour.");setStaffMessage("Modification enregistrée et partagée.");}
+    catch(e){toast("Erreur : "+e.message);setStaffMessage("Échec de l'enregistrement : "+e.message,true);}
+    finally{b.disabled=false;b.textContent="Enregistrer";}
+  }));
+  container.querySelectorAll("[data-avail]").forEach(b=>b.addEventListener("click",async()=>{
+    const p=state.parents.find(x=>x.name===b.dataset.avail);if(!p)return;
+    try{await persistParent(p.name,{available:!p.available});toast("Disponibilité mise à jour.");}
+    catch(e){toast("Erreur : "+e.message);}
+  }));
+  container.querySelectorAll("[data-random]").forEach(b=>b.addEventListener("click",async()=>{
+    const p=state.parents.find(x=>x.name===b.dataset.random);if(!p)return;
+    try{await persistParent(p.name,{random:p.random===false});toast("Paramètre de tirage mis à jour.");}
+    catch(e){toast("Erreur : "+e.message);}
+  }));
 }
 function reviewRequest(id,approve){
   const req=getRequests(),r=req.find(x=>x.id===id);if(!r)return;
@@ -385,6 +528,23 @@ document.getElementById("parentModal").addEventListener("click",e=>{if(e.target.
 document.getElementById("menuToggle").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("open"));
 document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("open")));
 renderFilters();renderAll();
+// Les visiteurs lisent les compteurs partagés, sans disposer des droits de modification.
+if(initSupabase()){
+  loadSharedParents().catch(error=>console.warn("Chargement des lignées partagées :",error.message));
+}
+if(staffMode) startStaff();
+document.getElementById("staffLoginForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!supabaseClient){showStaffLogin("Supabase n'est pas configuré.");return;}
+  const email=document.getElementById("staffEmail").value.trim();
+  const password=document.getElementById("staffPassword").value;
+  const button=e.submitter;button.disabled=true;button.textContent="Connexion…";
+  const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+  button.disabled=false;button.textContent="Se connecter";
+  if(error) showStaffLogin("Connexion impossible : "+error.message);
+});
+document.getElementById("staffLogout").addEventListener("click",async()=>{if(supabaseClient) await supabaseClient.auth.signOut();});
+
 </script>
 </body>
 </html>

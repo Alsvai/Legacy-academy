@@ -1,16 +1,41 @@
-# Legacy Academy
+# The Legacy Academy — version avec espace staff sécurisé
 
-Site web statique de l'académie RP, prêt pour GitHub Pages.
+## Ce qui est ajouté
+- L'espace staff n'apparaît plus dans le menu public.
+- Il s'ouvre uniquement avec `?staff=1`.
+- Connexion e-mail / mot de passe via Supabase Auth.
+- Seuls les comptes dont le `app_metadata.role` vaut `staff` peuvent accéder aux actions staff.
+- Dans le tableau de bord, le staff peut modifier le nombre de descendants de chaque parent (0 à 3), puis enregistrer.
+- Les nombres, disponibilités et options de tirage sont stockés dans Supabase et partagés avec les visiteurs.
 
-## Publier le site avec GitHub Pages
+## Installation Supabase
+1. Créez un projet sur https://supabase.com/.
+2. Dans **SQL Editor**, exécutez le contenu de `supabase/schema.sql`.
+3. Dans **Project Settings > API**, copiez l'URL du projet et la clé `anon` / publishable.
+4. Dans `index.html`, remplacez :
+   - `https://VOTRE-PROJET.supabase.co` par l'URL de votre projet ;
+   - `VOTRE_CLE_ANON` par la clé anon / publishable.
+5. Dans **Authentication > Users**, créez un utilisateur avec e-mail et mot de passe pour chaque membre staff.
+6. Pour chaque utilisateur staff, attribuez `app_metadata` avec le rôle `staff`. Dans Supabase, cela se fait via une action administrative (Dashboard / serveur de confiance), jamais depuis le navigateur. Exemple de valeur :
+   ```json
+   {"role":"staff"}
+   ```
+   Ne mettez jamais une clé `service_role` dans `index.html`.
 
-1. Crée un nouveau dépôt sur GitHub (par exemple `legacy-academy`).
-2. Envoie `index.html`, `.nojekyll` et `README.md` à la racine du dépôt.
-3. Ouvre **Settings > Pages** dans le dépôt.
-4. Dans **Build and deployment**, sélectionne **Deploy from a branch**.
-5. Choisis la branche `main` et le dossier `/ (root)`, puis valide avec **Save**.
-6. Attends la publication : GitHub affichera l'adresse de ton site dans la section Pages.
+## Premier chargement du répertoire
+- Après configuration, ouvrez le site normalement. Le site public lit les lignées de la table `parents`.
+- Ouvrez ensuite `https://VOTRE-PSEUDO.github.io/VOTRE-DEPOT/?staff=1`, connectez-vous avec un compte staff.
+- Si la table est vide, la connexion staff importe le répertoire initial du site.
+- Les lignes déjà présentes ne sont pas réinitialisées : les nombres saisis par le staff sont conservés.
+
+## Utilisation staff
+1. Ouvrez l'URL avec `?staff=1`.
+2. Connectez-vous.
+3. Dans **Gestion des parents**, modifiez le champ **Descendants** entre 0 et 3.
+4. Cliquez sur **Enregistrer**. La modification est stockée dans Supabase.
+5. Le bouton **Se déconnecter** ferme la session.
 
 ## Important
-
-Cette version fonctionne comme une démonstration statique. Les données enregistrées dans le navigateur (localStorage), comme les fiches et les réservations, ne sont pas partagées entre les visiteurs ou les appareils. L'espace staff n'est pas sécurisé pour une utilisation réelle. Pour un serveur RP avec plusieurs joueurs, il faudra connecter une base de données et une authentification (par exemple Supabase) et sécuriser les droits côté serveur.
+- Le système protège les modifications des lignées côté base de données avec RLS. Masquer l'URL n'est pas la protection : c'est l'authentification Supabase et les règles SQL qui protègent l'accès.
+- Les demandes de réservation et les fiches de personnages restent locales à cette version ; elles ne sont pas encore synchronisées entre les visiteurs.
+- N'ajoutez jamais la clé `service_role` dans le code du site.
